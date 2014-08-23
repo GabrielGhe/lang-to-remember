@@ -99,7 +99,7 @@ function one() {
 //using promises
 promiseOne()
 	.then(promiseTwo)
-	.then(promiseThree)
+	.then(promiseThree);
 ```
 
 <p>A popular promise library for nodejs is <a href="https://github.com/kriskowal/q">Q</a></p>
@@ -119,11 +119,13 @@ promiseOne()
 	.fail(function(error) {
 		//can handle error
 	})
-	.done() //like a finally
+	.done();
 	
 	
 //Create promises from async methods
-Q.ninvoke(obj, "asyncMethod", { param1: "parameter" })
+Q.ninvoke(obj, "asyncMethod", {
+		param1: "parameter"
+	})
 	.then(function(resultFromAsyncMethod) {
 		//do stuff
 	});
@@ -270,7 +272,7 @@ console.log(reversed) // [5, 4, 3, 2, 1]
 	<!-- Header -->
 	<tr>
 		<td>Operation name</td>
-		<td>Java symbol</td>
+		<td>Javascript symbol</td>
 		<td>Example</td>
 		<td>Result</td>
 		<td>Explanation</td>
