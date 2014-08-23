@@ -5,7 +5,7 @@ Things to remember for javascript
 <h3 id="tableOfContent">Table of content</h3>
 <ol>
   <li><a href="#1-string">Strings</a></li>
-  <li><a href="#2-linked-list">Linked List</a></li>
+  <li><a href="#2-callbacks">Callbacks</a></li>
   <li><a href="#3-tree">Tree</a></li>
   <li><a href="#4-graph">Graph</a></li>
   <li><a href="#5-sorting">Sorting</a></li>
@@ -30,129 +30,51 @@ Things to remember for javascript
 ```javascript
 "A string  "
 
-  .toLowerCase()    // "a string  "
-  .toUpperCase()    // "A STRING  "
+  .toLowerCase()    	// "a string  "
+  .toUpperCase()    	// "A STRING  "
   
   //takes a delimiter
-  .split("")        // ['A', 's', 't', 'r', 'i', 'n', 'g']
+  .split("")        	// ['A', 's', 't', 'r', 'i', 'n', 'g', ' ', ' ']
+  
+  //with split ^
+  .join()							// "A string  "
   
   //takes startPos endPos
-  .substring(2, 4)  // "st"
+  .substring(2, 4)  	// "st"
   
-  .indexOf("str")   // 2
+  .indexOf("str")   	// 2
   
-  .trim()           // "A string"
+  .trim()           	// "A string"
   
   .replace("string", "blah"); // "A blah  "
   
-  .match(/a str.*/i)// "A string  "
+  .match(/a str.*/i)	// "A string  "
 ```
 
 <!-- 
 #########################################
-#					#
-#	Linked list			#
-#					#
+#
+#	Callbacks
+#
 #########################################
 -->
-<h3><a href="#table-of-content">2. Linked List</a></h3>
+<h3><a id="callbacks" href="#table-of-content">2. Callbacks</a></h3>
 
-<p>The node class which is the "element" of a linked list</p>
-```java
-class Node {
-  int val;
-  Node next;
-  
-  Node(int x) {
-    val = x;      //value
-    next = null;  //next element
-  }
+<p>Callbacks are a big part of javascript</p>
+```javascript
+
+function callFuncOnFive(cb){
+	return cb(5);
 }
+
+var returnedValue = callFuncOnFive(function(num){
+	return num * num;
+});
+
+console.log(returnedValue); // 25 (5*5)
+
 ```
 
-<p>Stack implementation using the Linked List data structure</p>
-```java
-class Stack{
-  Node top; 
-  
-  /**
-   *  Default constructor
-   */
-  public Stack(){}    
-  
-
-  /**
-   *  Method that returns top node
-   *  without removing it
-   */
-  public Node peek(){
-    if(top != null){
-      return top;
-    }
-    return null;
-  }
-  
-  /**
-   *  Method used to remove and
-   *  return top node
-   */
-  public Node pop(){
-    if(top == null){
-      return null;
-    } else {
-      Node temp = new Node(top.val);
-      top = top.next;
-      return temp;	
-    }
-  }
-  
-  /** 
-   *  Method to add Node
-   *  to the top of the Stack
-   */
-  public void push(Node n){
-    if(n != null){
-      n.next = top;
-      top = n;
-    }
-  }
-}
-```
-
-<p>Queue implementation using the Linked List data structure</p>
-
-```java
-class Queue {
-	Node first, last;
-  
-  /**
-   *  Push an element to the back
-   *  of the queue
-   */
-  public void enqueue(Node n){
-    if(first == null){
-      first = n;
-      last = first;
-    } else {
-      last.next = n;
-      last = n;
-    }
-  }
- 
-  /**
-   *  Remove element at the front
-   */
-  public Node dequeue(){
-    if(first == null){
-      return null;
-    } else {
-      Node temp = new Node(first.val);
-      first = first.next;
-      return temp;
-    }	
-  }
-}
-```
 
 <!-- 
 #########################################
