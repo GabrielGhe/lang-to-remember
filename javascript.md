@@ -10,10 +10,7 @@ Things to remember for javascript
   <li><a href="#4-context">Context</a></li>
   <li><a href="#5-sorting">Sorting</a></li>
   <li><a href="#6-bit-manipulation">Bit Manipulation</a></li>
-  <li><a href="#7-probability">Probability</a></li>
-  <li><a href="#8-files">Files</a></li>
-  <li><a href="#9-sockets">Sockets</a></li>
-  <li><a href="#10-regex">Regex</a></li>
+  <li><a href="#7-math">Math</a></li>
 </ol>
 
 <!-- 
@@ -181,12 +178,23 @@ function sameBlah() {
 <p>It also hoists up function declarations</p>
 ```javascript
 function outerFunc() {
-	//but I called it before initialization!
+	//How did it work?? I called innerFunc before initialization it!
 	innerFunc();
 
 	function innerFunc() {
 		console.log(5);
 	}
+}
+
+//is not the same as
+function outerFunc() {
+	x(); //won't work
+
+	var x = function() {
+		console.log(5);
+	}
+	
+	x(); //will work
 }
 
 ```
@@ -197,7 +205,7 @@ function outerFunc() {
 obj = {
 ...
 	render: function () {
-		var that = this;
+		var that = this; //have to do this every time...
 		this.getAsyncData(function () {
 			that.specialFunction();
 			that.anotherSpecialFunction();
@@ -232,7 +240,20 @@ obj = {
 #########################################
 -->
 <h3><a href="#table-of-content">5. Sorting</a></h3>
-<p>Here is a table of comparison sorting algorithms and their time complexity</p>
+<p>Sorting in javascript is easy</p>
+
+```javascript
+var sorted = [4, 3, 5, 2, 1].sort(function(a, b) {
+	return a-b;
+});
+console.log(sorted) // [1, 2, 3, 4, 5]
+
+
+var reversed = [4, 3, 5, 2, 1].sort(function(a, b) {
+	return b-a;
+});
+console.log(reversed) // [5, 4, 3, 2, 1]
+```
 
 
 <!-- 
@@ -300,349 +321,13 @@ obj = {
 <!-- 
 #########################################
 #
-#			Probability
+#			Math
 #
 #########################################
 -->
-<h3><a href="#table-of-content">7. Probability</a></h3>
-<p>There are 50 people in a room, what’s the probability that two people have the same birthday? (Ignoring the fact of leap year, i.e., 365 day every year)</p>
+<h3><a href="#table-of-content">7. Math</a></h3>
 
 ```javascript
-public static double caculateProbability(int n){
-	double x = 1; 
- 
-	for(int i=0; i<n; i++){
-		x *=  (365.0-i)/365.0;
-	}
- 
-	double pro = Math.round((1-x) * 100);
-	return pro/100;
-}
+var x = Math.random() // float [0, 1[
+Math.floor((Math.random() * 100) + 1); // int [1, 100[
 ```
-
-<!-- 
-#########################################
-#
-#			Files
-#
-#########################################
--->
-<h3><a href="#table-of-content">8. Files</a></h3>
-
-<p>Writing to a file.</p>
-```java
-//java7... appends to file
-try(Formatter f = new Formatter("myText.txt")) {
-	f.format("this is output text", null);
-} catch(IOException ioe){
-	ioe.printStackTrace();
-}
-
-//older java
-Formatter f;
-try {
-	f = new Formatter("myText.txt");
-	f.format("this is output text", null);
-} catch(IOException ioe){
-	ioe.printStackTrace();
-} finally {
-	f.close();
-}
-```
-
-<p>Reading from a file</p>
-```java
-//read all the lines in a file
-try(Scanner scan = new Scanner(new File("myText.txt") ) ){
-	ArrayList<String> x = new ArrayList<String>();
-	while(scan.hasNext()){
-		x.add(scan.nextLine());
-	}
-} catch (FileNotFoundException e) {
-	e.printStackTrace();
-}
-```
-
-
-<!-- 
-#########################################
-#
-#			Files
-#
-#########################################
--->
-<h3><a href="#table-of-content">9. Sockets</a></h3>
-
-<p>Server that listens for a connection, writes the date and closes connection</p>
-```java
-//Server
-ServerSocket listener = new ServerSocket(9090);
-try {
-    while (true) {
-        Socket socket = listener.accept();
-        try {
-            ObjectOutputStream out =
-                new ObjectOutputStream(socket.getOutputStream());
-            out.writeObject("Hi there");
-        } finally {
-            socket.close();
-        }
-    }
-}
-finally {
-    listener.close();
-}
-
-
-//Client the data is sent through serialization
-//to send objects, they must be serializable
-Socket s = new Socket(serverAddress, 9090);
-try{
-	ObjectInputStream input = new ObjectInputStream(s.getInputStream());
-	String answer = (String)input.readObject();
-} catch(ClassCastException cce){
-	cce.printStackTrace();
-} finally {
-	s.close();
-}
-
-//On mac, you can open a terminal and write "nc localhost 9090" to connect to server socket
-```
-
-
-<!-- 
-#########################################
-#
-#			Regex
-#
-#########################################
--->
-<h3><a href="#table-of-content">10. Regex</a></h3>
-<p>
-The full documentation can be found here 
-<a href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html">
-Docs
-</a>
-</p>
-
-```java
-
-//Long way, that can be reused
-Pattern p = Pattern.compile("a*b");
-Matcher m = p.matcher("aaaab");
-boolean b = m.matches();
-
-//shorthand
-boolean b = Pattern.matches("a*b", "aaaaab");
-```
-
-<p><b>Regular-expression constructs</b></p>
-<table>
-	<tr>
-		<td>[abc]</td>
-		<td>a, b, or c (simple class)</td>
-	</tr>
-	
-	<!-- 2 -->
-	<tr>
-		<td>
-			[^abc]
-		</td>
-		<td>
-			Any character except a, b, or c (negation)
-		</td>
-	</tr>
-	
-	<!-- 3 -->
-	<tr>
-		<td>
-			[a-zA-Z]
-		</td>
-		<td>
-			a through z or A through Z, inclusive (range)
-		</td>
-	</tr>
-	
-	<!-- 4 -->
-	<tr>
-		<td>
-			[a-d[m-p]]
-		</td>
-		<td>
-			a through d, or m through p: [a-dm-p] (union)
-		</td>
-	</tr>
-	
-	<!-- 5 -->
-	<tr>
-		<td>
-			[a-z&&[def]]
-		</td>
-		<td>
-			d, e, or f (intersection)
-		</td>
-	</tr>
-	
-	<!-- 6 -->
-	<tr>
-		<td>
-			[a-z&&[^bc]]
-		</td>
-		<td>
-			a through z, except for b and c: [ad-z] (subtraction)
-		</td>
-	</tr>
-	
-	<!-- 7 -->
-	<tr>
-		<td>
-			[a-z&&[^m-p]]
-		</td>
-		<td>
-			a through z, and not m through p: [a-lq-z](subtraction)
-		</td>
-	</tr>
-</table>
-
-<p><b>Predefined character classes</b></p>
-<table>
-	<!-- 1 -->
-	<tr>
-		<td>
-			.
-		</td>
-		<td>
-			Any character (may or may not match line terminators)
-		</td>
-	</tr>
-	
-	<!-- 2 -->
-	<tr>
-		<td>
-			\d
-		</td>
-		<td>
-			A digit: [0-9]
-		</td>
-	</tr>
-	
-	<!-- 3 -->
-	<tr>
-		<td>
-			\D
-		</td>
-		<td>
-			A non-digit: [^0-9]
-		</td>
-	</tr>
-	
-	<!-- 4 -->
-	<tr>
-		<td>
-			\s
-		</td>
-		<td>
-			A whitespace character: [ \t\n\x0B\f\r]
-		</td>
-	</tr>
-	
-	<!-- 5 -->
-	<tr>
-		<td>
-			\S
-		</td>
-		<td>
-			A non-whitespace character: [^\s]
-		</td>
-	</tr>
-	
-	<!-- 6 -->
-	<tr>
-		<td>
-			\w
-		</td>
-		<td>
-			A word character: [a-zA-Z_0-9]
-		</td>
-	</tr>
-	
-	<!-- 7 -->
-	<tr>
-		<td>
-			\W
-		</td>
-		<td>
-			A non-word character: [^\w]
-		</td>
-	</tr>
-</table>
-
-
-<p><b>Greedy quantifiers</b></p>
-
-<table>
-	<!-- 1 -->
-	<tr>
-		<td>
-			X?
-		</td>
-		<td>
-			X, once or not at all
-		</td>
-	</tr>
-	
-	<!-- 2 -->
-	<tr>
-		<td>
-			X*
-		</td>
-		<td>
-			X, zero or more times
-		</td>
-	</tr>
-	
-	<!-- 3 -->
-	<tr>
-		<td>
-			X+
-		</td>
-		<td>
-			X, one or more times
-		</td>
-	</tr>
-	
-	<!-- 4 -->
-	<tr>
-		<td>
-			X{n}
-		</td>
-		<td>
-			X, exactly n times
-		</td>
-	</tr>
-	
-	<!-- 5 -->
-	<tr>
-		<td>
-			X{n,}
-		</td>
-		<td>
-			X, at least n times
-		</td>
-	</tr>
-	
-	<!-- 6 -->
-	<tr>
-		<td>
-			X{n,m}
-		</td>
-		<td>
-			X, at least n but not more than m times
-		</td>
-	</tr>
-</table>
-
-
-
-
-
