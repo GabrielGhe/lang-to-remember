@@ -24,32 +24,32 @@ Things to remember for javascript
 ```javascript
 "A string  "
 
-  .toLowerCase()	// "a string  "
-  .toUpperCase()	// "A STRING  "
+  .toLowerCase()        // "a string  "
+  .toUpperCase()        // "A STRING  "
   
   //takes a delimiter
-  .split("")		// ['A', 's', 't', 'r', 'i', 'n', 'g', ' ', ' ']
+  .split("")            // ['A', 's', 't', 'r', 'i', 'n', 'g', ' ', ' ']
   
   //with split ^
-  .join()		// "A string  "
+  .join()               // "A string  "
   
   //takes startPos endPos
-  .substring(2, 4)	// "st"
+  .substring(2, 4)      // "st"
   
-  .indexOf("str")	// 2
+  .indexOf("str")       // 2
   
-  .trim()		// "A string"
+  .trim()               // "A string"
   
   .replace("string", "blah"); // "A blah  "
   
-  .match(/a str.*/i)	// "A string  "
+  .match(/a str.*/i)    // "A string  "
   
   //takes in a position
-  .charAt(0)		// "A"
-  .charCodeAt(0)	// 65
+  .charAt(0)            // "A"
+  .charCodeAt(0)        // 65
   
   //takes in base
-  4.toString(2)		// 110
+  4.toString(2)         // 110
 ```
 
 <!-- 
