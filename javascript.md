@@ -6,7 +6,7 @@ Things to remember for javascript
 <ol>
   <li><a href="#1-string">Strings</a></li>
   <li><a href="#2-callbacks">Callbacks</a></li>
-  <li><a href="#3-tree">Tree</a></li>
+  <li><a href="#3-context">Tree</a></li>
   <li><a href="#4-graph">Graph</a></li>
   <li><a href="#5-sorting">Sorting</a></li>
   <li><a href="#6-recursion-and-iteration">Recursion and iteration</a></li>
