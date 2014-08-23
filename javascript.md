@@ -6,7 +6,7 @@ Things to remember for javascript
 <ol>
   <li><a href="#1-string">Strings</a></li>
   <li><a href="#2-callbacks">Callbacks</a></li>
-  <li><a href="#3-context">Tree</a></li>
+  <li><a href="#3-promises">Promises</a></li>
   <li><a href="#4-graph">Graph</a></li>
   <li><a href="#5-sorting">Sorting</a></li>
   <li><a href="#6-recursion-and-iteration">Recursion and iteration</a></li>
@@ -49,6 +49,13 @@ Things to remember for javascript
   .replace("string", "blah"); // "A blah  "
   
   .match(/a str.*/i)	// "A string  "
+  
+  //takes in a position
+  .charAt(0)					// "A"
+  .charCodeAt(0)			// 65
+  
+  //takes in base
+  4.toString(2)				// 110
 ```
 
 <!-- 
@@ -78,30 +85,77 @@ console.log(returnedValue); // 25 (5*5)
 
 <!-- 
 #########################################
-#										#
-#				Tree					#
-#										#
+#
+#		Promises
+#
 #########################################
 -->
-<h3><a href="#table-of-content">3. Tree</a></h3>
-<p>The tree class here is for the binary tree</p>
+<h3><a href="#table-of-content">3. Promises</a></h3>
+<p>Promises allow you to flatten a callback pyramid</p>
 
-```java
-class TreeNode {
-	int value;
-	TreeNode parent;
-	TreeNode left;
-	TreeNode right;
+```javascript
+//using callbacks
+function one() {
+	function two() {
+		function three() {
+			
+		}
+	}
 }
+
+//using promises
+promiseOne()
+	.then(promiseTwo)
+	.then(promiseThree)
 ```
 
-<ol>
-	<li>Binary Search Tree: for all nodes, left children <= current node <= right children</li>
-	<li>Balanced vs. Unbalanced: In a balanced tree, the depth of the sibling tree's can differ max by 1</li>
-	<li>Full Binary Tree: every node other than the leaves has two children.</li>
-	<li>Perfect Binary Tree: a full binary tree + all leaves same depth + parents have 2 children</li>
-	<li>Complete Binary Tree: a binary tree with only last lvl possibly incomplete. We add to lowest lvl and right most</li>
-</ol>
+<p>A popular promise library for nodejs is <a href="https://github.com/kriskowal/q">Q</a></p>
+
+```javascript
+//it allows you to do many awesome things like
+var Q = require("q");
+
+
+//chain promises
+promiseOne()
+	.then(promiseTwo)
+	.then(promiseThree)
+	.then(function() {
+		//normal anonymous function
+	})
+	.fail(function(error) {
+		//can handle error
+	})
+	.done() //like a finally
+	
+	
+//Create promises from async methods
+Q.ninvoke(obj, "asyncMethod", { param1: "parameter" })
+	.then(function(resultFromAsyncMethod) {
+		//do stuff
+	});
+	
+
+//Use callbacks and promises together
+function async(err, val){
+	//this is a async callback
+	var deferred = Q.defer();
+	
+	if (err) {
+		deferred.reject(new Error(err));
+	} else {
+		deferred.resolve(val);
+	}
+	return deferred.promise;
+}
+
+
+//A value can be turned into a promise
+Q({ x:5 })
+ .then(function(val){
+ 	//val == 5
+ });
+```
 
 
 <!-- 
