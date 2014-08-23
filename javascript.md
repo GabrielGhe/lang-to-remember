@@ -34,7 +34,7 @@ Things to remember for javascript
   .split("")        	// ['A', 's', 't', 'r', 'i', 'n', 'g', ' ', ' ']
   
   //with split ^
-  .join()							// "A string  "
+  .join()		// "A string  "
   
   //takes startPos endPos
   .substring(2, 4)  	// "st"
@@ -48,11 +48,11 @@ Things to remember for javascript
   .match(/a str.*/i)	// "A string  "
   
   //takes in a position
-  .charAt(0)					// "A"
-  .charCodeAt(0)			// 65
+  .charAt(0)		// "A"
+  .charCodeAt(0)	// 65
   
   //takes in base
-  4.toString(2)				// 110
+  4.toString(2)		// 110
 ```
 
 <!-- 
@@ -65,8 +65,8 @@ Things to remember for javascript
 <h3><a id="callbacks" href="#table-of-content">2. Callbacks</a></h3>
 
 <p>Callbacks are a big part of javascript</p>
-```javascript
 
+```javascript
 function callFuncOnFive(cb){
 	return cb(5);
 }
@@ -76,7 +76,6 @@ var returnedValue = callFuncOnFive(function(num){
 });
 
 console.log(returnedValue); // 25 (5*5)
-
 ```
 
 
@@ -154,6 +153,76 @@ Q({ x:5 })
  });
 ```
 
+<!-- 
+#########################################
+#
+#				Context
+#
+#########################################
+-->
+<h3><a href="#table-of-content">4. Context</a></h3>
+
+<h4>Hoisting</h4>
+<p>Javascript hoists variable declarations</p>
+```javascript
+function blah() {
+	var a = 1;
+}
+
+//is the same as
+
+var a;
+function sameBlah() {
+	a = 1;
+}
+
+```
+
+<p>It also hoists up function declarations</p>
+```javascript
+function outerFunc() {
+	//but I called it before initialization!
+	innerFunc();
+
+	function innerFunc() {
+		console.log(5);
+	}
+}
+
+```
+
+<h4>Bind method</h4>
+```javascript
+//instead of doing something like this
+obj = {
+...
+	render: function () {
+		var that = this;
+		this.getAsyncData(function () {
+			that.specialFunction();
+			that.anotherSpecialFunction();
+		});
+	}
+...
+};
+
+
+//We do
+obj = {
+...
+	render: function () {
+		this.getAsyncData(function () {
+			this.specialFunction();
+			this.anotherSpecialFunction();
+		}.bind(this)); 
+		//This bind means that when getAsyncData gets called
+		//this === obj
+	}
+...
+};
+
+```
+
 
 <!-- 
 #########################################
@@ -169,7 +238,7 @@ Q({ x:5 })
 <!-- 
 #########################################
 #
-#						Bit Manipulation
+#				Bit Manipulation
 #
 #########################################
 -->
