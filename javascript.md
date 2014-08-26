@@ -11,6 +11,7 @@ Things to remember for javascript
   <li><a href="#5-sorting">Sorting</a></li>
   <li><a href="#6-bit-manipulation">Bit Manipulation</a></li>
   <li><a href="#7-math">Math</a></li>
+  <li><a href="#8-latest-version">Latest Version</a></li>
 </ol>
 
 <!-- 
@@ -333,3 +334,17 @@ console.log(reversed) // [5, 4, 3, 2, 1]
 var x = Math.random() // float [0, 1[
 Math.floor((Math.random() * 100) + 1); // int [1, 100[
 ```
+
+
+<!-- 
+#########################################
+#
+#			Math
+#
+#########################################
+-->
+<h3><a href="#table-of-content">8. Latest Version</a></h3>
+
+<p>
+The latest javascript is ECMA6 <a href="https://github.com/lukehoban/es6features">check out the features</a>.
+</p>
