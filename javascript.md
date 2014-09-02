@@ -29,7 +29,7 @@ Things to remember for javascript
   .toUpperCase()        // "A STRING  "
   
   //takes a delimiter
-  .split("")            // ['A', 's', 't', 'r', 'i', 'n', 'g', ' ', ' ']
+  .split("")            // ['A', ' ', 's', 't', 'r', 'i', 'n', 'g', ' ', ' ']
   
   //with split ^
   .join()               // "A string  "
