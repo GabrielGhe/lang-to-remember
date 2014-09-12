@@ -1,6 +1,7 @@
 PythonToRemember
 =================
-Things to remember for python
+Things to remember for python...
+example code can be found <a href="https://github.com/GabrielGhe/CoderbyteChallenges">here</a>
 
 <h3 id="tableOfContent">Table of content</h3>
 <ol>
