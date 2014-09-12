@@ -14,7 +14,7 @@ Things to remember for python
 
 <h3 id="arrays"><a href="#table-of-content">1. Arrays</a></h3>
 ```python
-x = ["4", "3", "2", "1"]
+x = list("4321")  # ["4", "3", "2", "1"]
 x.append("val1")  # ["4", "3", "2", "1", "val1"]
 x.pop()           # ["4", "3", "2", "1"]
 x.sort()          # ["1", "2", "3", "4"]
@@ -39,15 +39,23 @@ dict["z"] = 4 # {"y": 6, "x": 5, "z": 4}
 ```python
 int("4")    # 4
 int(5, 2)   # 101
+2**3        # 8 (2^3)
+4**.5       # 2.0
 ```
 
 <h3 id="probability"><a href="#table-of-content">4. Probability</a></h3>
 ```python
 import itertools
 
-itertools.combinations(array,x) # array choose x
+itertools.combinations(array,x)  # array choose x
 for comb in itertools.combinations(array,x):
   # do stuff
+  
+itertools.permutations(arr, x)   # permutation
+for comb in itertools.permutations(array,x):
+  # do stuff
+  
+
 ```
 
 <h3 id="string"><a href="#table-of-content">5. String</a></h3>
@@ -85,4 +93,8 @@ x = [c for c in x if c.isdigit()]   # ['1', '2', '3', '4']
 
 # get idx and value in loop
 for idx, val in enumerate(array):
+
+# sets
+# https://docs.python.org/2/library/sets.html
+set([1, 1, 3, 5, 6, 6, 4])          # set([1, 3, 4, 5, 6])
 ```
